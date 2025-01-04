@@ -20,4 +20,4 @@ router.route('/me').get(authenticateToken, getSingleUser);
 
 router.route('/books/:bookId').delete(authenticateToken, deleteBook);
 
-export default router;
+export { router };
