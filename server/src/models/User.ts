@@ -1,7 +1,7 @@
-import mongoose from 'mongoose';
-
+import mongoose, { Document, Schema } from 'mongoose';
+import bcrypt from 'bcrypt';
 // import schema from Book.js
-import bookSchema from './Book.js';
+import { Book } from './Book.js';
 import type { BookDocument } from './Book.js';
 
 export interface UserDocument extends Document {
@@ -32,7 +32,7 @@ const userSchema = new Schema<UserDocument>(
       required: true,
     },
     // set savedBooks to be an array of data that adheres to the bookSchema
-    savedBooks: [bookSchema],
+    savedBooks: [Book],
   },
   // set this to use virtual below
   {
@@ -62,6 +62,6 @@ userSchema.virtual('bookCount').get(function () {
   return this.savedBooks.length;
 });
 
-const User = model<UserDocument>('User', userSchema);
+const User = mongoose.model<UserDocument>('User', userSchema);
 
 export { User };

@@ -1,5 +1,5 @@
 import express from 'express';
-const router = express.Router();
+const userRoutes = express.Router();
 import {
   createUser,
   getSingleUser,
@@ -12,12 +12,12 @@ import {
 import { authenticateToken } from '../../services/auth.js';
 
 // put authMiddleware anywhere we need to send a token for verification of user
-router.route('/').post(createUser).put(authenticateToken, saveBook);
+userRoutes.route('/').post(createUser).put(authenticateToken, saveBook);
 
-router.route('/login').post(login);
+userRoutes.route('/login').post(login);
 
-router.route('/me').get(authenticateToken, getSingleUser);
+userRoutes.route('/me').get(authenticateToken, getSingleUser);
 
-router.route('/books/:bookId').delete(authenticateToken, deleteBook);
+userRoutes.route('/books/:bookId').delete(authenticateToken, deleteBook);
 
-export { router };
+export { userRoutes };
